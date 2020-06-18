@@ -1,0 +1,6 @@
+VAV-32:
+  id: VAV
+  type: HVAC/VAV
+  connections:
+  - UK-LON-6PS-1:CONTAINS
+  - AHU-123: FEEDS # maps are not supported?

@@ -1,0 +1,8 @@
+VAV-32:
+  type: NAMESPACE/DEVICE_TYPE
+  id: SOME_GUID_12345  # optional
+  links:
+    ANOTHER-ENTITY: THIS_IS_WRONG
+    YET-ANOTHER-ENTITY:
+      yet_source_device_field: this_device_field
+      yet_supply_air_damper_position_command_1: supply_air_damper_command
