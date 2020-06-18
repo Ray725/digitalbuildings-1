@@ -3,21 +3,15 @@ import sys
 
 
 '''
-demo:
-- good_building
-- bad_syntax
-- bad_tabbing
-- bad_dup_keys
-- good_connections
-- bad_connections
-- good_translation*
-- bad_translation*
-- good_link
-- bad_link
-
 questions:
-- for virtual entities, ID not required. so I think to check this in ontology, but where's a list of virtual types?
+- for virtual entities, ID not required. so I think to check this in ontology validation step, but where's a list of virtual types?
+    - virtual primarily has links
 - i'm not sure how to parse metadata?
+- how do you recommend i get started with generating the universe?
+
+notes:
+- Make demo for Keith
+- do the translation checking of valid keys in the next universe step, don't recreate universe in validator
 '''
 
 schema = MapPattern(Str(), 
