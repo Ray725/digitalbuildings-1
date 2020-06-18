@@ -1,0 +1,6 @@
+FCU-1234:
+  type: FACILITIES/EXAMPLE_1
+  id: EXAMPLE/1234
+  translation: 
+    zone_air_temperature_sensor: "temp_1"
+    supply_air_isolation_damper_command: "damper_1"

@@ -1,0 +1,6 @@
+# Room
+UK-LON-S2-1-1C3G:
+  type: FACILITIES/ROOM
+  id: FACILITIES/2345678
+  connections:
+    UK-LON-S2-2: CONTAINS

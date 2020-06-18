@@ -1,0 +1,14 @@
+FCU-12345:
+  type: FACILITIES/EXAMPLE_2
+  id: EXAMPLE/12345
+  translation: 
+    zone_air_temperature_sensor:
+      present_value: "temp_1"
+      unit_values:
+        degrees_celsius: "degC"
+        degrees_degrees: "degF"
+    supply_air_isolation_damper_command:
+      present_value: "damper_1"
+      states:
+        OPEN: "1"
+        CLOSED: "2"
