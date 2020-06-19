@@ -1,5 +1,11 @@
-from strictyaml import Map, MapPattern, Str, Optional, YAMLValidationError, Any, load, Enum, Regex, Seq
+import os
 import sys
+
+# add ontology packages to path
+sys.path.append(os.path.abspath(os.path.join('..', 'ontology_validator'))) 
+
+from strictyaml import Map, MapPattern, Str, Optional, YAMLValidationError, Any, load, Enum, Regex, Seq
+from yamlformat.validator import external_file_lib
 
 # TODO check all valid states and ontological references in next validation steps
 schema = MapPattern(Str(), 
