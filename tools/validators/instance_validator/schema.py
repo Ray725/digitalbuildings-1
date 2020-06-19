@@ -28,13 +28,19 @@ def build_universe():
     config = presubmit_validate_types_lib.SeparateConfigFiles(yaml_files)
     universe = presubmit_validate_types_lib.BuildUniverse(config)
 
+    '''
+    <yamlformat.validator.entity_type_lib.EntityTypeUniverse object at 0x7e83858f8e48>
+    <yamlformat.validator.field_lib.FieldUniverse object at 0x7e8385d85c88>
+    <yamlformat.validator.subfield_lib.SubfieldUniverse object at 0x7e8385e2b240>
+    <yamlformat.validator.state_lib.StateUniverse object at 0x7e8385c53f60>
+    <yamlformat.validator.unit_lib.UnitUniverse object at 0x7e8385dcb0f0>
+    '''
+
     entities = universe.entity_type_universe
     fields = universe.field_universe
     subfields = universe.subfield_universe
     states = universe.state_universe
     units = universe.unit_universe
-
-    print(entities, fields, subfields, states, units)
 
 # TODO check all valid states and ontological references in next validation steps
 schema = MapPattern(Str(), 
