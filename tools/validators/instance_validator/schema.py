@@ -28,30 +28,35 @@ def build_universe():
     config = presubmit_validate_types_lib.SeparateConfigFiles(yaml_files)
     universe = presubmit_validate_types_lib.BuildUniverse(config)
 
+    return universe
+
+def parse_universe(universe):
     states = universe.state_universe
     entities = universe.entity_type_universe
     units = universe.unit_universe
-    fields = universe.field_universe
     subfields = universe.subfield_universe
 
-    print(fields.IsFieldDefined('process_return_water_temperature_sensor', ''))
+    # USAGE: fields.IsFieldDefined('process_return_water_temperature_sensor', '')
+    fields = universe.field_universe
 
+    # consolidate all entity information into dictionary
+    entities_map = {}
+    entity_type_namespaces = entities.type_namespaces_map
+    for k in entity_type_namespaces.keys():
+        valid_types_map = entity_type_namespaces[k].valid_types_map
+
+        namespace = entity_type_namespaces[k].namespace
+        entities_map[namespace] = {}
+
+        for v_k in valid_types_map.keys():
+            entity_type = valid_types_map[v_k]
+            entities_map[namespace][v_k] = entity_type.GetAllFields(run_unsafe=True)
+    
     subfields_map = subfields.GetSubfieldsMap('')
     states_map = states.GetStatesMap('')
     units_map = units.GetUnitsMap('')
 
-    entity_type_namespaces = entities.type_namespaces_map
-    for k in entity_type_namespaces.keys():
-        # print('TypeNamespace name:', entity_type_namespaces[k].namespace)
-
-        '''
-        valid_types_map = entity_type_namespaces[k].valid_types_map
-
-        for v_k in valid_types_map.keys():
-            entity_type = valid_types_map[v_k]
-            print(v_k)
-            print(entity_type.GetAllFields(run_unsafe=True))
-        '''
+    return fields, subfields_map, states_map, units_map, entities_map
 
 # TODO check all valid states and ontological references in next validation steps
 schema = MapPattern(Str(), 
@@ -120,4 +125,5 @@ if __name__ == '__main__':
     print(yaml.as_yaml())
 '''
 
-build_universe()
+universe = build_universe()
+fields, subfields_map, states_map, units_map, entities_map = parse_universe(universe)
