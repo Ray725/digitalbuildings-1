@@ -2,6 +2,35 @@ from strictyaml import Map, MapPattern, Str, Optional, YAMLValidationError, Any,
 import sys
 import os
 
+# TODO add input and return type checks in all functions
+
+# TODO check all valid states and ontological references in next validation steps
+schema = MapPattern(Str(), 
+    Map({
+        'type': Str(), 
+        'id': Str(), 
+        Optional('connections'): MapPattern(Str(), Str())
+                               | Seq(MapPattern(Str(), Str())),
+        Optional('links'): MapPattern(Str(), 
+            MapPattern(Str(), Str())),
+        Optional('translation'): Any(),
+        Optional('metadata'): Any()
+    }))
+
+translation_schema = Str() | Any()
+
+# TODO add manual check for translation_data_schema to de-duplicate units/unit_values/states
+# TODO add all units/unit_values/states to translation_data_schema
+translation_data_schema = Str() | Map({
+                                    'present_value': Str(),
+                                    Optional('states'): MapPattern(Str(), Str()),
+                                    Optional('units'): Map({
+                                        'key': Str(),
+                                        'values': MapPattern(Str(), Str())
+                                    }),
+                                    Optional('unit_values'): MapPattern(Str(), Str())
+                                })
+
 # DEPRECATED
 def get_ontology_file_list():
     ontology_fp = os.path.abspath('../../../ontology/yaml/resources/')
@@ -58,33 +87,6 @@ def parse_universe(universe):
 
     return fields, subfields_map, states_map, units_map, entities_map
 
-# TODO check all valid states and ontological references in next validation steps
-schema = MapPattern(Str(), 
-    Map({
-        'type': Str(), 
-        'id': Str(), 
-        Optional('connections'): MapPattern(Str(), Str())
-                               | Seq(MapPattern(Str(), Str())),
-        Optional('links'): MapPattern(Str(), 
-            MapPattern(Str(), Str())),
-        Optional('translation'): Any(),
-        Optional('metadata'): Any()
-    }))
-
-translation_schema = Str() | Any()
-
-# TODO add manual check for translation_data_schema to de-duplicate units/unit_values/states
-# TODO add all units/unit_values/states to translation_data_schema
-translation_data_schema = Str() | Map({
-                                    'present_value': Str(),
-                                    Optional('states'): MapPattern(Str(), Str()),
-                                    Optional('units'): Map({
-                                        'key': Str(),
-                                        'values': MapPattern(Str(), Str())
-                                    }),
-                                    Optional('unit_values'): MapPattern(Str(), Str())
-                                })
-
 def load_yaml_with_schema(filepath, schema):
     f = open(filepath).read()
 
@@ -94,7 +96,7 @@ def load_yaml_with_schema(filepath, schema):
     except YAMLValidationError as error:
         raise error
 
-def main(filename):
+def parse_yaml(filename: str):
     yaml = load_yaml_with_schema(filename, schema)
 
     top_name = yaml.keys()[0]
@@ -113,17 +115,46 @@ def main(filename):
 
     return yaml
 
-'''
+def validate_type(entity: dict, entities_map):
+    entity_type_str = str(entity['type'])
+    type_parse = entity_type_str.split('/')
+
+    if len(type_parse) != 2:
+        raise Exception('type improperly formatted:', entity_type_str)
+
+    namespace = type_parse[0]
+    entity_type = type_parse[1]
+
+    if namespace not in entities_map.keys():
+        raise Exception('invalid namespace:', namespace)
+    
+    if entity_type not in entities_map[namespace].keys():
+        raise Exception('invalid entity type:', entity_type)
+
+def validate_entity(entity: dict, fields, subfields_map, states_map, units_map, entities_map):
+    validate_type(entity, entities_map)
+
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         print('USAGE: python3 schema.py yaml_file_path')
         sys.exit(1)
 
+    print('\nValidator starting ...')
     filename = sys.argv[1]
-    yaml = main(filename)
 
-    print(yaml.as_yaml())
-'''
+    # throws errors for syntax
+    parsed = dict(parse_yaml(filename))
 
-universe = build_universe()
-fields, subfields_map, states_map, units_map, entities_map = parse_universe(universe)
+    print('Passed syntax checks!')
+    print('Building ontology universe ...')
+
+    universe = build_universe()
+    fields, subfields_map, states_map, units_map, entities_map = parse_universe(universe)
+
+    entity_names = list(parsed.keys())
+
+    for name in entity_names:
+        entity = dict(parsed[name])
+        validate_entity(entity, fields, subfields_map, states_map, units_map, entities_map)
+    
+    print('Passed all checks!\n')
