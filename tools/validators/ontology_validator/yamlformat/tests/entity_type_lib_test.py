@@ -180,7 +180,7 @@ class EntityTypeLibTest(absltest.TestCase):
         for f in type_folder.GetFindings():
             print('[LOGGING] type_folder GetFindings() context:', f.file_context)
             print('[LOGGING] file_context filepath:', f.file_context.filepath, f.file_context.raw_filepath)
-            print('[LOGGING] file_context line info:', f.GetLineInfo())
+            print('[LOGGING] file_context line info:', f.file_context.GetLineInfo())
 
     self.assertFalse(type_folder.GetFindings())
     self.assertFalse(type_folder.local_namespace.GetFindings())
