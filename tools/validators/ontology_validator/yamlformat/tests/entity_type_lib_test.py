@@ -160,7 +160,7 @@ class EntityTypeLibTest(absltest.TestCase):
 
     good_filepath = os.path.normpath(os.path.join(folderpath, 'mammal.yaml'))
 
-    print(good_filepath)
+    print('[LOGGING] good_filepath:', good_filepath)
 
     # Build test proto
     yaml_doc = {
@@ -174,7 +174,8 @@ class EntityTypeLibTest(absltest.TestCase):
 
     type_folder.AddFromConfig([yaml_doc], good_filepath)
 
-    print(type_folder.GetFindings())
+    print('[LOGGING] type_folder GetFindings():', type_folder.GetFindings())
+    print('[LOGGING] type_folder GetFindings() context:', type_folder.GetFindings()[0].file_context)
 
     self.assertFalse(type_folder.GetFindings())
     self.assertFalse(type_folder.local_namespace.GetFindings())
