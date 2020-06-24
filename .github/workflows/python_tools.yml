@@ -5,7 +5,7 @@ name: Tools
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, fix_windows_tests ]
   pull_request:
     branches: [ master ]
 
