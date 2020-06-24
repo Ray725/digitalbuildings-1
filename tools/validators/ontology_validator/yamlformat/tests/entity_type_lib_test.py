@@ -175,7 +175,10 @@ class EntityTypeLibTest(absltest.TestCase):
     type_folder.AddFromConfig([yaml_doc], good_filepath)
 
     print('[LOGGING] type_folder GetFindings():', type_folder.GetFindings())
-    print('[LOGGING] type_folder GetFindings() context:', type_folder.GetFindings()[0].file_context)
+
+    if type_folder.GetFindings() != False:
+        for f in type_folder.GetFindings():
+            print('[LOGGING] type_folder GetFindings() context:', f.file_context)
 
     self.assertFalse(type_folder.GetFindings())
     self.assertFalse(type_folder.local_namespace.GetFindings())
