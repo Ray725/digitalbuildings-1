@@ -37,7 +37,9 @@ def IsValidFolderForType(path, component_type):
   print('[LOGGING] :: IsValidFolderForType path', path)
 
   dir_name = os.path.dirname(path)
-  return dir_name == base_lib.SUBFOLDER_NAMES[component_type]
+  subfolder_names = base_lib.SUBFOLDER_NAMES[component_type]
+
+  return os.path.normpath(os.path.join(dir_name, subfolder_names)) == path
 
   '''
   # replace regex check to allow windows filepath format
