@@ -346,7 +346,8 @@ class EntityTypeLibTest(absltest.TestCase):
   def testAddDuplicateTypes(self):
     fields_universe = field_lib.FieldUniverse([])
     fields_universe._namespace_map = {'': ('animal'), 'ANIMAL': ('meow')}
-    folderpath = 'ANIMAL/entity_types'
+    # folderpath = 'ANIMAL/entity_types'
+    folderpath = os.path.normpath(os.path.normpath('ANIMAL', 'entity_types'))
     type_folder = entity_type_lib.EntityTypeFolder(folderpath, fields_universe)
     self.assertFalse(type_folder.GetFindings())
 
