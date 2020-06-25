@@ -14,6 +14,7 @@
 
 """Shared base class for all configuration folders."""
 import re
+import os
 
 from yamlformat.validator import base_lib
 from yamlformat.validator import findings_lib
