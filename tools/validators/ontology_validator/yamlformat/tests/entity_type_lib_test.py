@@ -158,7 +158,7 @@ class EntityTypeLibTest(absltest.TestCase):
     type_folder = entity_type_lib.EntityTypeFolder(folderpath)
     self.assertFalse(type_folder.GetFindings())
 
-    good_filepath = os.path.abspath(os.path.normpath(os.path.join(folderpath, 'mammal.yaml')))
+    good_filepath = os.path.realpath(os.path.normpath(os.path.join(folderpath, 'mammal.yaml')))
 
     print('[LOGGING] good_filepath:', good_filepath)
 
