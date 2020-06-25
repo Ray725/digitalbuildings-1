@@ -31,10 +31,10 @@ def IsValidFolderForType(path, component_type):
   Returns:
     True if the path is valid.
   """
-  print('[LOGGING] :: IsValidFolderForType component_type', component_type)
-  print('[LOGGING] :: IsValidFolderForType SUBFOLDER_NAMES', base_lib.SUBFOLDER_NAMES[component_type])
-  print('[LOGGING] :: IsValidFolderForType dir_name', os.path.dirname(path))
-  print('[LOGGING] :: IsValidFolderForType path', path)
+  # print('[LOGGING] :: IsValidFolderForType component_type', component_type)
+  # print('[LOGGING] :: IsValidFolderForType SUBFOLDER_NAMES', base_lib.SUBFOLDER_NAMES[component_type])
+  # print('[LOGGING] :: IsValidFolderForType dir_name', os.path.dirname(path))
+  # print('[LOGGING] :: IsValidFolderForType path', path)
 
   dir_name = os.path.dirname(path)
   subfolder_names = base_lib.SUBFOLDER_NAMES[component_type]

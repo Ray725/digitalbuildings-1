@@ -118,17 +118,20 @@ class EntityTypeLibTest(absltest.TestCase):
 # ---------------------------------------------------------------------------- #
 
   def testCreateTypeFolderSuccess(self):
-    folderpath = 'NS/entity_types'
+    # folderpath = 'NS/entity_types'
+    folderpath = os.path.normpath(os.path.join('NS', 'entity_types'))
     type_folder = entity_type_lib.EntityTypeFolder(folderpath)
     self.assertFalse(type_folder.GetFindings())
 
   def testCreateTypeFolderSuccessWithSubfolder(self):
-    folderpath = 'NS/entity_types/subfolder'
+    # folderpath = 'NS/entity_types/subfolder'
+    folderpath = os.path.normpath(os.path.join('NS', 'entity_types', 'subfolder'))
     type_folder = entity_type_lib.EntityTypeFolder(folderpath)
     self.assertFalse(type_folder.GetFindings())
 
   def testCreateTypeFolderFailure(self):
-    bad_folderpath = 'NS/bad'
+    # bad_folderpath = 'NS/bad'
+    bad_folderpath = os.path.normpath(os.path.join('NS', 'bad'))
     with self.assertRaises(RuntimeError):
       entity_type_lib.EntityTypeFolder(bad_folderpath)
 
