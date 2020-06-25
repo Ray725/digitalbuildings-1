@@ -31,6 +31,9 @@ def IsValidFolderForType(path, component_type):
   Returns:
     True if the path is valid.
   """
+  print('[LOGGING] :: IsValidFolderForType SUBFOLDER_NAMES', base_lib.SUBFOLDER_NAMES[component_type])
+  print('[LOGGING] :: IsValidFolderForType dir_name', os.path.dirname(path))
+
   dir_name = os.path.dirname(path)
   return dir_name == base_lib.SUBFOLDER_NAMES[component_type]
 
