@@ -30,12 +30,17 @@ def IsValidFolderForType(path, component_type):
   Returns:
     True if the path is valid.
   """
+  dir_name = os.path.dirname(path)
+  return dir_name == base_lib.SUBFOLDER_NAMES[component_type]
+
+  '''
+  # replace regex check to allow windows filepath format
   m = re.match(r'(\w*)/?{0}'.format(base_lib.SUBFOLDER_NAMES[component_type]),
                path)
   if m is None:
     return False
   return True
-
+  '''
 
 class ConfigFolder(findings_lib.Findings):
   """Parent class for folder classes that wraps up some of the validation logic.

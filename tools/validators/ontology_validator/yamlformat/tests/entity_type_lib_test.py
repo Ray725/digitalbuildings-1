@@ -25,7 +25,8 @@ from yamlformat.validator import findings_lib
 from yamlformat.validator import test_helpers_lib
 
 
-_GOOD_PATH_FORMAT = '{0}/entity_types/anyfolder'
+# _GOOD_PATH_FORMAT = '{0}/entity_types/anyfolder'
+_GOOD_PATH_FORMAT = os.path.normpath(os.path.join('{0}', 'entity_types', 'anyfolder'))
 _GOOD_PATH = _GOOD_PATH_FORMAT.format('mynamespace')
 _GOOD_PATH_2 = _GOOD_PATH_FORMAT.format('mynamespace2')
 
@@ -132,7 +133,8 @@ class EntityTypeLibTest(absltest.TestCase):
       entity_type_lib.EntityTypeFolder(bad_folderpath)
 
   def testAddFromConfigExtraKeys(self):
-    folderpath = 'ANIMAL/entity_types'
+    # folderpath = 'ANIMAL/entity_types'
+    folderpath = os.path.normpath(os.path.join('ANIMAL', 'entity_types'))
     # don't supply a fields_universe
     type_folder = entity_type_lib.EntityTypeFolder(folderpath)
     self.assertFalse(type_folder.GetFindings())
