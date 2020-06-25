@@ -37,7 +37,8 @@ _F = test_helpers_lib.Field
 class EntityTypeLibTest(absltest.TestCase):
 
   def testEntityTypeUniverseGetFindings(self):
-    filepath = _GOOD_PATH + '/file.yaml'
+    # filepath = _GOOD_PATH + '/file.yaml'
+    filepath = os.path.normpath(os.path.join(_GOOD_PATH, 'file.yaml'))
     context = findings_lib.FileContext(filepath)
     folder = entity_type_lib.EntityTypeFolder(_GOOD_PATH)
     folder.AddFinding(findings_lib.InconsistentFileLocationError('', context))
@@ -60,7 +61,8 @@ class EntityTypeLibTest(absltest.TestCase):
     self.assertFalse(types_universe.IsValid())
 
   def testEntityTypeUniverseFindsDupIds(self):
-    filepath = _GOOD_PATH + '/file.yaml'
+    # filepath = _GOOD_PATH + '/file.yaml'
+    filepath = os.path.normpath(os.path.join(_GOOD_PATH, 'file.yaml'))
     folder = entity_type_lib.EntityTypeFolder(_GOOD_PATH)
     namespace = folder.local_namespace
 
@@ -87,11 +89,13 @@ class EntityTypeLibTest(absltest.TestCase):
     self.assertFalse(entity_type2.GetFindings())
 
   def testEntityTypeUniverseHandlesNamespaceMovesWithIds(self):
-    filepath = _GOOD_PATH + '/file.yaml'
+    # filepath = _GOOD_PATH + '/file.yaml'
+    filepath = os.path.normpath(os.path.join(_GOOD_PATH, 'file.yaml'))
     folder = entity_type_lib.EntityTypeFolder(_GOOD_PATH)
     namespace = folder.local_namespace
 
-    filepath2 = _GOOD_PATH_2 + '/file.yaml'
+    # filepath2 = _GOOD_PATH_2 + '/file.yaml'
+    filepath2 = os.path.normpath(os.path.join(_GOOD_PATH_2, 'file.yaml'))
     folder2 = entity_type_lib.EntityTypeFolder(_GOOD_PATH_2)
     namespace2 = folder2.local_namespace
 
@@ -166,7 +170,7 @@ class EntityTypeLibTest(absltest.TestCase):
 
     good_filepath = os.path.normpath(os.path.join(folderpath, 'mammal.yaml'))
 
-    print('[LOGGING] good_filepath:', good_filepath)
+    # print('[LOGGING] good_filepath:', good_filepath)
 
     # Build test proto
     yaml_doc = {
@@ -180,13 +184,15 @@ class EntityTypeLibTest(absltest.TestCase):
 
     type_folder.AddFromConfig([yaml_doc], good_filepath)
 
-    print('[LOGGING] type_folder GetFindings():', type_folder.GetFindings())
+    # print('[LOGGING] type_folder GetFindings():', type_folder.GetFindings())
 
+    '''
     if type_folder.GetFindings() != False:
         for f in type_folder.GetFindings():
             print('[LOGGING] type_folder GetFindings() context:', f.file_context)
             print('[LOGGING] file_context filepath:', f.file_context.filepath, f.file_context.raw_filepath)
             print('[LOGGING] file_context line info:', f.file_context.GetLineInfo())
+    '''
 
     self.assertFalse(type_folder.GetFindings())
     self.assertFalse(type_folder.local_namespace.GetFindings())
@@ -199,11 +205,13 @@ class EntityTypeLibTest(absltest.TestCase):
     self.assertEqual(good_filepath, new_type.file_context.filepath)
 
   def testAddFromConfigBadLocation(self):
-    folderpath = 'ANIMAL/entity_types'
+    # folderpath = 'ANIMAL/entity_types'
+    filepath = os.path.normpath(os.path.join('ANIMAL', 'entity_types'))
     type_folder = entity_type_lib.EntityTypeFolder(folderpath)
     self.assertFalse(type_folder.GetFindings())
 
     bad_typepath = os.path.join('something', 'INSECT/entity_types/ant')
+    bad_typepath = os.path.normpath(os.path.join('something', 'INSECT/entity_types/ant'))
     type_folder.AddFromConfig([], bad_typepath)
     self.assertTrue(
         type_folder.HasFindingTypes(
@@ -215,7 +223,8 @@ class EntityTypeLibTest(absltest.TestCase):
         '': ('animal'),
         'ANIMAL': ('meow', 'claws')
     }
-    folderpath = 'ANIMAL/entity_types'
+    # folderpath = 'ANIMAL/entity_types'
+    folderpath = os.path.normpath(os.path.join('ANIMAL', 'entity_types'))
     type_folder = entity_type_lib.EntityTypeFolder(folderpath, fields_universe)
     self.assertFalse(type_folder.GetFindings())
 
@@ -241,7 +250,8 @@ class EntityTypeLibTest(absltest.TestCase):
         '': ('animal'),
         'ANIMAL': ('meow', 'claws')
     }
-    folderpath = 'ANIMAL/entity_types'
+    # folderpath = 'ANIMAL/entity_types'
+    folderpath = os.path.normpath(os.path.join('ANIMAL', 'entity_types'))
     type_folder = entity_type_lib.EntityTypeFolder(folderpath, fields_universe)
 
     self.assertFalse(type_folder.GetFindings())
@@ -270,11 +280,13 @@ class EntityTypeLibTest(absltest.TestCase):
         'ANIMAL': ('meow'),
         'ATTACK': ('claws')
     }
-    folderpath = 'ANIMAL/entity_types'
+    # folderpath = 'ANIMAL/entity_types'
+    folderpath = os.path.normpath(os.path.join('ANIMAL', 'entity_types'))
     type_folder = entity_type_lib.EntityTypeFolder(folderpath, fields_universe)
     self.assertFalse(type_folder.GetFindings())
 
-    rel_typepath = os.path.join(folderpath, 'mammal')
+    # rel_typepath = os.path.join(folderpath, 'mammal')
+    rel_typepath = os.path.normpath(os.path.join(folderpath, 'mammal'))
 
     # field 'claws' is undefined.
     entity_type = entity_type_lib.EntityType(
@@ -295,11 +307,13 @@ class EntityTypeLibTest(absltest.TestCase):
   def testAddTypeUndefinedFields(self):
     fields_universe = field_lib.FieldUniverse([])
     fields_universe._namespace_map = {'': ('animal'), 'ANIMAL': ('meow')}
-    folderpath = 'ANIMAL/entity_types'
+    # folderpath = 'ANIMAL/entity_types'
+    folderpath = os.path.normpath(os.path.join('ANIMAL', 'entity_types'))
     type_folder = entity_type_lib.EntityTypeFolder(folderpath, fields_universe)
     self.assertFalse(type_folder.GetFindings())
 
-    rel_typepath = os.path.join(folderpath, 'mammal')
+    # rel_typepath = os.path.join(folderpath, 'mammal')
+    rel_typepath = os.path.normpath(os.path.join(folderpath, 'mammal'))
 
     # field 'claws' is undefined.
     entity_type = entity_type_lib.EntityType(
@@ -316,7 +330,8 @@ class EntityTypeLibTest(absltest.TestCase):
   def testAddMultipleTypes(self):
     fields_universe = field_lib.FieldUniverse([])
     fields_universe._namespace_map = {'': ('animal'), 'ANIMAL': ('meow')}
-    folderpath = 'ANIMAL/entity_types'
+    # folderpath = 'ANIMAL/entity_types'
+    folderpath = os.path.normpath(os.path.join('ANIMAL', 'entity_types'))
     type_folder = entity_type_lib.EntityTypeFolder(folderpath, fields_universe)
     self.assertFalse(type_folder.GetFindings())
 
@@ -354,7 +369,9 @@ class EntityTypeLibTest(absltest.TestCase):
     type_folder = entity_type_lib.EntityTypeFolder(folderpath, fields_universe)
     self.assertFalse(type_folder.GetFindings())
 
-    rel_typepath = os.path.join(folderpath, 'mammal')
+    # rel_typepath = os.path.join(folderpath, 'mammal')
+    rel_typepath = os.path.normpath(os.path.join(folderpath, 'mammal'))
+
     # entity type
     entity_type = entity_type_lib.EntityType(
         filepath=rel_typepath,
