@@ -153,7 +153,8 @@ class EntityTypeLibTest(absltest.TestCase):
         type_folder.HasFindingTypes([findings_lib.UnrecognizedFormatError]))
 
   def testAddFromConfig(self):
-    folderpath = 'ANIMAL/entity_types'
+    # folderpath = 'ANIMAL/entity_types'
+    folderpath = os.path.normpath(os.path.join('ANIMAL', 'entity_types'))
     # don't supply a fields_universe
     type_folder = entity_type_lib.EntityTypeFolder(folderpath)
     self.assertFalse(type_folder.GetFindings())
