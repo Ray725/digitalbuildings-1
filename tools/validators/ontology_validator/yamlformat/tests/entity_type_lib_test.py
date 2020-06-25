@@ -206,7 +206,7 @@ class EntityTypeLibTest(absltest.TestCase):
 
   def testAddFromConfigBadLocation(self):
     # folderpath = 'ANIMAL/entity_types'
-    filepath = os.path.normpath(os.path.join('ANIMAL', 'entity_types'))
+    folderpath = os.path.normpath(os.path.join('ANIMAL', 'entity_types'))
     type_folder = entity_type_lib.EntityTypeFolder(folderpath)
     self.assertFalse(type_folder.GetFindings())
 
