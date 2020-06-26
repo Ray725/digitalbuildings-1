@@ -38,6 +38,7 @@ def IsValidFolderForType(path, component_type):
   dir_name = os.path.dirname(path)
   subfolder_names = base_lib.SUBFOLDER_NAMES[component_type]
 
+  print(f'[LOGGING {path}] :: IsValidFolderForType result:', os.path.normpath(os.path.join(dir_name, subfolder_names)) in path)
   return os.path.normpath(os.path.join(dir_name, subfolder_names)) in path
 
   '''
