@@ -31,9 +31,9 @@ def IsValidFolderForType(path, component_type):
   Returns:
     True if the path is valid.
   """
-  print(f'[LOGGING {path}] :: IsValidFolderForType component_type', component_type)
-  print(f'[LOGGING {path}] :: IsValidFolderForType SUBFOLDER_NAMES', base_lib.SUBFOLDER_NAMES[component_type])
-  print(f'[LOGGING {path}] :: IsValidFolderForType dir_name', os.path.dirname(path))
+  # print(f'[LOGGING {path}] :: IsValidFolderForType component_type', component_type)
+  # print(f'[LOGGING {path}] :: IsValidFolderForType SUBFOLDER_NAMES', base_lib.SUBFOLDER_NAMES[component_type])
+  # print(f'[LOGGING {path}] :: IsValidFolderForType dir_name', os.path.dirname(path))
 
   subfolder_names = base_lib.SUBFOLDER_NAMES[component_type]
   dir_name = path
@@ -45,8 +45,8 @@ def IsValidFolderForType(path, component_type):
   while os.path.dirname(dir_name) != '':
     dir_name = os.path.dirname(dir_name)
 
-  print(f'[LOGGING {path}] :: IsValidFolderForType final_check_vars:', os.path.normpath(os.path.join(dir_name, subfolder_names)), path)
-  print(f'[LOGGING {path}] :: IsValidFolderForType result:', os.path.normpath(os.path.join(dir_name, subfolder_names)) in path)
+  # print(f'[LOGGING {path}] :: IsValidFolderForType final_check_vars:', os.path.normpath(os.path.join(dir_name, subfolder_names)), path)
+  # print(f'[LOGGING {path}] :: IsValidFolderForType result:', os.path.normpath(os.path.join(dir_name, subfolder_names)) in path)
   return os.path.normpath(os.path.join(dir_name, subfolder_names)) in path
 
   '''
@@ -82,6 +82,7 @@ class ConfigFolder(findings_lib.Findings):
           base_lib.ComponentType(component_type).name))
     self._component_type = component_type
 
+    print(f'[LOGGING] ConfigFolder init :: folderpath', folderpath)
     self._folderpath = folderpath
     self._this_folder_yaml_regex = re.compile(r'^{0}/.*\.yaml'.format(
         self._folderpath))
