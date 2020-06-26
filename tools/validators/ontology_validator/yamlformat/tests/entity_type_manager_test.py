@@ -32,17 +32,17 @@ entity_type_manager.MIN_SET_SIZE = 1
 
 
 def _GetFieldFolder(yaml, namespace=''):
-  folderpath = os.path.join(namespace, 'fields')
+  folderpath = os.path.normpath(os.path.join(namespace, 'fields'))
   field_folder = field_lib.FieldFolder(folderpath)
-  good_filepath = os.path.join(folderpath, 'f.yaml')
+  good_filepath = os.path.normpath(os.path.join(folderpath, 'f.yaml'))
   field_folder.AddFromConfig([yaml], good_filepath)
   return field_folder
 
 
 def _GetEntityTypeFolder(field_universe, yaml, namespace=''):
-  folderpath = os.path.join(namespace, 'entity_types')
+  folderpath = os.path.normpath(os.path.join(namespace, 'entity_types'))
   type_folder = entity_type_lib.EntityTypeFolder(folderpath, field_universe)
-  good_filepath = os.path.join(folderpath, 'f.yaml')
+  good_filepath = os.path.normpath(os.path.join(folderpath, 'f.yaml'))
   type_folder.AddFromConfig([yaml], good_filepath)
   return type_folder
 
