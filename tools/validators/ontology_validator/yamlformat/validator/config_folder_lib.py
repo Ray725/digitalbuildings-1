@@ -38,7 +38,7 @@ def IsValidFolderForType(path, component_type):
   dir_name = os.path.dirname(path)
   subfolder_names = base_lib.SUBFOLDER_NAMES[component_type]
 
-  return os.path.normpath(os.path.join(dir_name, subfolder_names)) == path
+  return os.path.normpath(os.path.join(dir_name, subfolder_names)) in path
 
   '''
   # replace regex check to allow windows filepath format
