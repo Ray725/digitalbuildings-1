@@ -35,11 +35,15 @@ def IsValidFolderForType(path, component_type):
   print(f'[LOGGING {path}] :: IsValidFolderForType SUBFOLDER_NAMES', base_lib.SUBFOLDER_NAMES[component_type])
   print(f'[LOGGING {path}] :: IsValidFolderForType dir_name', os.path.dirname(path))
 
+  subfolder_names = base_lib.SUBFOLDER_NAMES[component_type]
   dir_name = path
+
+  # no subfolders
+  if os.path.dirname(dir_name) == '':
+    return subfolder_names in path
+
   while os.path.dirname(dir_name) != '':
     dir_name = os.path.dirname(dir_name)
-
-  subfolder_names = base_lib.SUBFOLDER_NAMES[component_type]
 
   print(f'[LOGGING {path}] :: IsValidFolderForType final_check_vars:', os.path.normpath(os.path.join(dir_name, subfolder_names)), path)
   print(f'[LOGGING {path}] :: IsValidFolderForType result:', os.path.normpath(os.path.join(dir_name, subfolder_names)) in path)
