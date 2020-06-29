@@ -15,6 +15,7 @@
 """Shared base class for all configuration folders."""
 import re
 import os
+from pathlib import Path
 
 from yamlformat.validator import base_lib
 from yamlformat.validator import findings_lib
@@ -187,9 +188,17 @@ class ConfigFolder(findings_lib.Findings):
       The namespace name or None
     """
     print('[LOGGING GetNamespaceFromPath] :: SUBFOLDER_NAMES', base_lib.SUBFOLDER_NAMES[self._component_type])
+
+    '''
     regex = re.compile(r'^(\w*)/?{0}.*'.format(
         base_lib.SUBFOLDER_NAMES[self._component_type]))
     m = regex.match(self._folderpath)
     if m is not None:
       return m.group(1)
     return None
+    '''
+    if base_lib.SUBFOLDER_NAMES[self._component_type] not in self._folderpath:
+      return None
+
+    path = Path(self._folderpath)
+    print('[LOGGING GetNamespaceFromPath] :: Path', path)
