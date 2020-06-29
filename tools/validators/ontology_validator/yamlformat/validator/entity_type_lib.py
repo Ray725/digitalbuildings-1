@@ -73,6 +73,9 @@ class EntityTypeUniverse(findings_lib.Findings):
     print('[LOGGING GetEntityType 3] :: type_namespaces_map', self.type_namespaces_map)
     print('[LOGGING GetEntityType 4] :: keys of type_namespaces_map', self.type_namespaces_map.keys())
 
+    # reassign to mean current directory
+    namespace_name = '.' if namespace_name == ''
+
     print('[LOGGING GetEntityType 5] :: namespace_name in keys()', 
       namespace_name in self.type_namespaces_map.keys())
     
