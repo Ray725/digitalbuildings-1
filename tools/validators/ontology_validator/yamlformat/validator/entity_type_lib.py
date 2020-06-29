@@ -20,6 +20,7 @@ from __future__ import print_function
 
 import re
 import typing
+import pathlib
 
 from yamlformat.validator import base_lib
 from yamlformat.validator import config_folder_lib
