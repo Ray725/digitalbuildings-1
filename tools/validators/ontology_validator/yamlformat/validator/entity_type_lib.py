@@ -72,6 +72,9 @@ class EntityTypeUniverse(findings_lib.Findings):
     print('[LOGGING GetEntityType] :: self.type_namespaces_map', self.type_namespaces_map)
     if namespace_name not in self.type_namespaces_map:
       return None
+
+    print('[LOGGING GetEntityType] :: type_namespaces_map.GetType', 
+      self.type_namespaces_map[namespace_name].GetType(typename))
     return self.type_namespaces_map[namespace_name].GetType(typename)
 
   def GetNamespace(self, namespace_name):
