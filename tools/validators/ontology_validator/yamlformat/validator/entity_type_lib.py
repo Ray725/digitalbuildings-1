@@ -71,11 +71,16 @@ class EntityTypeUniverse(findings_lib.Findings):
     print('[LOGGING GetEntityType 2] :: typename', typename)
     print('[LOGGING GetEntityType 3] :: type_namespaces_map', self.type_namespaces_map)
     print('[LOGGING GetEntityType 4] :: keys of type_namespaces_map', self.type_namespaces_map.keys())
+
+    print('[LOGGING GetEntityType 5] :: namespace_name in keys()', 
+      namespace_name in self.type_namespaces_map.keys())
+
     if namespace_name not in self.type_namespaces_map:
-      print('[LOGGING GetEntityType 5] :: namespace_name not in type_namespaces_map')
+      print('[LOGGING GetEntityType 6] :: namespace_name not in type_namespaces_map')
       return None
 
-    print('[LOGGING GetEntityType 5] :: type_namespaces_map.GetType', 
+
+    print('[LOGGING GetEntityType 6] :: type_namespaces_map.GetType', 
       self.type_namespaces_map[namespace_name].GetType(typename))
     return self.type_namespaces_map[namespace_name].GetType(typename)
 
