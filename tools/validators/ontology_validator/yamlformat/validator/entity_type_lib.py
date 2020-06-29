@@ -76,9 +76,10 @@ class EntityTypeUniverse(findings_lib.Findings):
       namespace_name in self.type_namespaces_map.keys())
     
     for k in self.type_namespaces_map.keys():
+      print('[LOGGING GetEntityType 6] :: k and namespace_name', str(k), namespace_name)
       if namespace_name == str(k):
         return self.type_namespaces_map[k].GetType(typename)
-    
+
     return None
 
     '''
