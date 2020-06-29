@@ -71,6 +71,7 @@ class EntityTypeUniverse(findings_lib.Findings):
     print('[LOGGING GetEntityType] :: typename', typename)
     print('[LOGGING GetEntityType] :: self.type_namespaces_map', self.type_namespaces_map)
     if namespace_name not in self.type_namespaces_map:
+      print('[LOGGING GetEntityType] :: namespace_name not in type_namespaces_map')
       return None
 
     print('[LOGGING GetEntityType] :: type_namespaces_map.GetType', 
