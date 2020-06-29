@@ -203,4 +203,5 @@ class ConfigFolder(findings_lib.Findings):
     path = Path(self._folderpath)
     print('[LOGGING GetNamespaceFromPath] :: Path', path)
     print('[LOGGING GetNamespaceFromPath] :: Path.root', path.root)
-    print('[LOGGING GetNamespaceFromPath] :: Path.parents', path.parents)
+    for p in path.parents:
+      print('[LOGGING GetNamespaceFromPath] :: parents', p)
