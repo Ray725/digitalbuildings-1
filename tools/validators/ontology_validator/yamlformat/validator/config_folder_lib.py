@@ -83,7 +83,7 @@ class ConfigFolder(findings_lib.Findings):
           base_lib.ComponentType(component_type).name))
     self._component_type = component_type
 
-    print(f'[LOGGING] ConfigFolder init :: folderpath', folderpath)
+    # print(f'[LOGGING] ConfigFolder init :: folderpath', folderpath)
     self._folderpath = folderpath
     # DEPRECATE REGEX
     # self._this_folder_yaml_regex = re.compile(r'^{0}/.*\.yaml'.format(self._folderpath))
@@ -187,7 +187,7 @@ class ConfigFolder(findings_lib.Findings):
     Returns:
       The namespace name or None
     """
-    print('[LOGGING GetNamespaceFromPath] :: SUBFOLDER_NAMES', base_lib.SUBFOLDER_NAMES[self._component_type])
+    # print('[LOGGING GetNamespaceFromPath] :: SUBFOLDER_NAMES', base_lib.SUBFOLDER_NAMES[self._component_type])
 
     '''
     regex = re.compile(r'^(\w*)/?{0}.*'.format(
@@ -201,9 +201,9 @@ class ConfigFolder(findings_lib.Findings):
       return None
 
     path = Path(self._folderpath)
-    print('[LOGGING GetNamespaceFromPath] :: Path', path)
-    print('[LOGGING GetNamespaceFromPath] :: Path.root', path.root)
-    for p in path.parents:
-      print('[LOGGING GetNamespaceFromPath] :: parents', p)
+    # print('[LOGGING GetNamespaceFromPath] :: Path', path)
+    # print('[LOGGING GetNamespaceFromPath] :: Path.root', path.root)
+    # for p in path.parents:
+      # print('[LOGGING GetNamespaceFromPath] :: parents', p)
 
     return path.parents[0]
