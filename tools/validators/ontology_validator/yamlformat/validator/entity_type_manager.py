@@ -309,6 +309,7 @@ class EntityTypeManager(findings_lib.Findings):
   def _GetTypeByName(self, qualified_name):
     print('[LOGGING GetTypeByName] :: qualified_name', qualified_name)
     print('[LOGGING GetTypeByName] :: self._universe', self._universe)
+    print('[LOGGING GetTypeByName] :: self._universe GetEntityType', self._universe.GetEntityType)
     split = qualified_name.split('/')
     return self._universe.GetEntityType(split[0], split[1])
 

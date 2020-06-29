@@ -67,6 +67,9 @@ class EntityTypeUniverse(findings_lib.Findings):
 
   def GetEntityType(self, namespace_name, typename):
     """Finds entity_type by namespace and typename and returns it or None."""
+    print('[LOGGING GetEntityType] :: namespace_name', namespace_name)
+    print('[LOGGING GetEntityType] :: typename', typename)
+    print('[LOGGING GetEntityType] :: self.type_namespaces_map', self.type_namespaces_map)
     if namespace_name not in self.type_namespaces_map:
       return None
     return self.type_namespaces_map[namespace_name].GetType(typename)
