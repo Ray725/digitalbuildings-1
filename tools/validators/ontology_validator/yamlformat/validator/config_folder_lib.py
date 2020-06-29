@@ -84,8 +84,8 @@ class ConfigFolder(findings_lib.Findings):
 
     print(f'[LOGGING] ConfigFolder init :: folderpath', folderpath)
     self._folderpath = folderpath
-    self._this_folder_yaml_regex = re.compile(r'^{0}/.*\.yaml'.format(
-        self._folderpath))
+    # DEPRECATE REGEX
+    # self._this_folder_yaml_regex = re.compile(r'^{0}/.*\.yaml'.format(self._folderpath))
 
     self._namespace_name = self._GetNamespaceFromPath()
     if self._namespace_name is None:
@@ -170,9 +170,15 @@ class ConfigFolder(findings_lib.Findings):
     Returns:
       True if the path is in the folder and has a .yaml extension.
     """
+    '''
+    # DEPRECATE REGEX
     if self._this_folder_yaml_regex.match(path) is None:
       return False
     return True
+    '''
+    if path.startswith(self._folderpath) and path.endswith('.yaml'):
+      return True
+    return False
 
   def _GetNamespaceFromPath(self):
     """Extracts the namespace name from the filepath.
@@ -180,6 +186,7 @@ class ConfigFolder(findings_lib.Findings):
     Returns:
       The namespace name or None
     """
+    print('[LOGGING GetNamespaceFromPath] :: SUBFOLDER_NAMES', base_lib.SUBFOLDER_NAMES[self._component_type])
     regex = re.compile(r'^(\w*)/?{0}.*'.format(
         base_lib.SUBFOLDER_NAMES[self._component_type]))
     m = regex.match(self._folderpath)
