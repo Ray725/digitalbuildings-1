@@ -260,6 +260,7 @@ class EntityTypeManager(findings_lib.Findings):
 
   def _FindDuplicates(self):
     """Identifies types that have identical field sets."""
+    print('[LOGGING FindDuplicates] :: NEW RUN')
     findings = []
     for subset in self._complete_field_sets_oi:
       if not subset:
@@ -284,13 +285,15 @@ class EntityTypeManager(findings_lib.Findings):
 
             optionality_compatible = True
             optionality_changes = 0
+            print('[LOGGING FindDuplicates] :: GetAllFields', entity_type.GetAllFields())
             for field in entity_type.GetAllFields():
               parent_field = entity_type.GetAllFields()[field]
               other_field = other_type.GetAllFields()[field]
-              print('[LOGGING FindDuplicates] :: parent_field', parent_field)
-              print('[LOGGING FindDuplicates] :: other_field', other_field)
+              print('[LOGGING FindDuplicates] :: parent_field bool', parent_field.optional)
+              print('[LOGGING FindDuplicates] :: other_field bool', other_field.optional)
               if not parent_field.optional and other_field.optional:
                 optionality_compatible = False
+                print('[LOGGING FindDuplicates] :: optionality_compatible is False')
                 break
               if parent_field != other_field:
                 optionality_changes += 1
