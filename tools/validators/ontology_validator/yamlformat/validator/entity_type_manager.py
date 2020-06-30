@@ -300,7 +300,7 @@ class EntityTypeManager(findings_lib.Findings):
             if not optionality_compatible:
               continue
             not_related[other_name] = optionality_changes
-            print('[LOGGING FindDuplicates] :: ', not_related)
+            print('[LOGGING FindDuplicates] :: not_related', not_related)
 
         if not not_related:
           continue
@@ -309,6 +309,7 @@ class EntityTypeManager(findings_lib.Findings):
         finding = findings_lib.DuplicateExpandedFieldSetsWarning(
             entity_type, not_related, frozenset(key_list))
         entity_type.AddFinding(finding)
+        print('[LOGGING FindDuplicates] :: appending to findings', finding)
         findings.append(finding)
     return findings
 
