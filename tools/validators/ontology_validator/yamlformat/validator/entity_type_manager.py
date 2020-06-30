@@ -300,6 +300,7 @@ class EntityTypeManager(findings_lib.Findings):
             if not optionality_compatible:
               continue
             not_related[other_name] = optionality_changes
+            print('[LOGGING FindDuplicates] :: ', not_related)
 
         if not not_related:
           continue
