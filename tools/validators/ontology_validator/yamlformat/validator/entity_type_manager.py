@@ -355,7 +355,7 @@ class EntityTypeManager(findings_lib.Findings):
           continue
         full_qual_type = os.path.normpath(os.path.join(ns_name, entity_type.typename))
         print('[LOGGING MapFields] :: full_qual_type', full_qual_type)
-        print('[LOGGING MapFields] :: original full_qual_type', '{0}/{1}'.format(ns_name, entity_type.type))
+        print('[LOGGING MapFields] :: original full_qual_type', '{0}/{1}'.format(ns_name, entity_type.typename))
         # full_qual_type = '{0}/{1}'.format(ns_name, entity_type.typename)
 
         # Sharding list calculation
