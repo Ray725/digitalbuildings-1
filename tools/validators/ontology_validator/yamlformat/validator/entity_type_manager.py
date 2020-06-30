@@ -311,6 +311,8 @@ class EntityTypeManager(findings_lib.Findings):
         entity_type.AddFinding(finding)
         print('[LOGGING FindDuplicates] :: appending to findings', finding)
         findings.append(finding)
+
+    print('[LOGGING FindDuplicates] :: findings', findings)
     return findings
 
   def _GetTypeByName(self, qualified_name):
