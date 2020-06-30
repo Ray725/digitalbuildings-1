@@ -262,6 +262,7 @@ class EntityTypeManager(findings_lib.Findings):
     """Identifies types that have identical field sets."""
     print('[LOGGING FindDuplicates] :: NEW RUN')
     findings = []
+    print('[LOGGING FindDuplicates] :: _complete_field_sets_oi', self._complete_field_sets_oi)
     for subset in self._complete_field_sets_oi:
       if not subset:
         continue
