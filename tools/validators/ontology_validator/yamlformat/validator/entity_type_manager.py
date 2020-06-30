@@ -24,6 +24,7 @@ from __future__ import print_function
 
 import collections
 import itertools
+import os
 
 from yamlformat.validator import base_lib
 from yamlformat.validator import findings_lib
