@@ -68,20 +68,20 @@ class EntityTypeUniverse(findings_lib.Findings):
 
   def GetEntityType(self, namespace_name, typename):
     """Finds entity_type by namespace and typename and returns it or None."""
-    print('[LOGGING GetEntityType 1] :: namespace_name', namespace_name)
-    print('[LOGGING GetEntityType 2] :: typename', typename)
-    print('[LOGGING GetEntityType 3] :: type_namespaces_map', self.type_namespaces_map)
-    print('[LOGGING GetEntityType 4] :: keys of type_namespaces_map', self.type_namespaces_map.keys())
+    # print('[LOGGING GetEntityType 1] :: namespace_name', namespace_name)
+    # print('[LOGGING GetEntityType 2] :: typename', typename)
+    # print('[LOGGING GetEntityType 3] :: type_namespaces_map', self.type_namespaces_map)
+    # print('[LOGGING GetEntityType 4] :: keys of type_namespaces_map', self.type_namespaces_map.keys())
 
     # reassign to mean current directory
     if namespace_name == '':
       namespace_name = '.'
 
-    print('[LOGGING GetEntityType 5] :: namespace_name in keys()', 
-      namespace_name in self.type_namespaces_map.keys())
+    # print('[LOGGING GetEntityType 5] :: namespace_name in keys()', 
+      # namespace_name in self.type_namespaces_map.keys())
     
     for k in self.type_namespaces_map.keys():
-      print('[LOGGING GetEntityType 6] :: k and namespace_name', str(k), namespace_name)
+      # print('[LOGGING GetEntityType 6] :: k and namespace_name', str(k), namespace_name)
       if (namespace_name in self.type_namespaces_map) or (namespace_name == str(k)):
         return self.type_namespaces_map[pathlib.Path(namespace_name)].GetType(typename)
 

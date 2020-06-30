@@ -287,6 +287,8 @@ class EntityTypeManager(findings_lib.Findings):
             for field in entity_type.GetAllFields():
               parent_field = entity_type.GetAllFields()[field]
               other_field = other_type.GetAllFields()[field]
+              print('[LOGGING FindDuplicates] :: parent_field', parent_field)
+              print('[LOGGING FindDuplicates] :: other_field', other_field)
               if not parent_field.optional and other_field.optional:
                 optionality_compatible = False
                 break
@@ -307,9 +309,9 @@ class EntityTypeManager(findings_lib.Findings):
     return findings
 
   def _GetTypeByName(self, qualified_name):
-    print('[LOGGING GetTypeByName] :: qualified_name', qualified_name)
-    print('[LOGGING GetTypeByName] :: self._universe', self._universe)
-    print('[LOGGING GetTypeByName] :: self._universe GetEntityType', self._universe.GetEntityType)
+    # print('[LOGGING GetTypeByName] :: qualified_name', qualified_name)
+    # print('[LOGGING GetTypeByName] :: self._universe', self._universe)
+    # print('[LOGGING GetTypeByName] :: self._universe GetEntityType', self._universe.GetEntityType)
     split = qualified_name.split('/')
     return self._universe.GetEntityType(split[0], split[1])
 
