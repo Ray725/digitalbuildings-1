@@ -348,6 +348,7 @@ class EntityTypeManager(findings_lib.Findings):
     # Map each individual field to the types that have that field
     # In the process also define groups of types to shard
     field_to_typenames = {}
+    print('[LOGGING MapFields] :: namespaces', self._universe.GetNamespaces())
     for namespace in self._universe.GetNamespaces():
       ns_name = namespace.namespace
       for entity_type in namespace.valid_types_map.values():
