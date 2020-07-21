@@ -120,7 +120,7 @@ class ConfigFolder(findings_lib.Findings):
     if not self._IsYamlUnderThisFolder(config_filename):
       self.AddFinding(
           findings_lib.InconsistentFileLocationError(
-              self._folderpath + r'/*.yaml', context))
+              self._folderpath + r'\\*.yaml|/*.yaml', context))
       return
 
     for document in documents:
