@@ -154,12 +154,12 @@ class EntityTypeLibTest(absltest.TestCase):
 
   def testAddFromConfig(self):
     # folderpath = 'ANIMAL/entity_types'
-    folderpath = os.path.norm(os.path.join('ANIMAL', 'entity_types'))
+    folderpath = os.path.join('ANIMAL', 'entity_types')
     # don't supply a fields_universe
     type_folder = entity_type_lib.EntityTypeFolder(folderpath)
     self.assertFalse(type_folder.GetFindings())
 
-    good_filepath = os.path.norm(os.path.join(folderpath, 'mammal.yaml'))
+    good_filepath = os.path.join(folderpath, 'mammal.yaml')
     # Build test proto
     yaml_doc = {
         'cat': {
