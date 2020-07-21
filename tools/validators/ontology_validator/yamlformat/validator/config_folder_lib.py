@@ -62,7 +62,7 @@ class ConfigFolder(findings_lib.Findings):
     self._component_type = component_type
 
     self._folderpath = folderpath
-    self._this_folder_yaml_regex = re.compile('^{0}(/|\\).*\.yaml'.format(
+    self._this_folder_yaml_regex = re.compile(r'^{0}(/|\).*\.yaml'.format(
         self._folderpath))
 
     self._namespace_name = self._GetNamespaceFromPath()
