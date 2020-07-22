@@ -32,6 +32,7 @@ def IsValidFolderForType(path, component_type):
   """
   print('LOGGING(base_lib.SUBFOLDER_NAMES[component_type]) ::', base_lib.SUBFOLDER_NAMES[component_type])
   print('LOGGING(path) ::', path)
+  print('LOGGING(formatted regex) ::', r'(\w*)[\/]?{0}'.format(base_lib.SUBFOLDER_NAMES[component_type]))
 
   m = re.match(r'(\w*)[\/]?{0}'.format(base_lib.SUBFOLDER_NAMES[component_type]),
                path)
