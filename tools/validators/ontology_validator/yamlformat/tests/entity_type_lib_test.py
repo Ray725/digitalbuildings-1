@@ -309,7 +309,7 @@ class EntityTypeLibTest(absltest.TestCase):
         filepath=rel_typepath,
         typename='cat',
         description='feline animal',
-        local_field_tuples=_FS(['ANIMAL/meow', 'ANIMAL/claws', '/animal']))
+        local_field_tuples=_FS([os.path.join('ANIMAL', 'meow'), os.path.join('ANIMAL', 'claws'), '/animal']))
     type_folder._AddType(entity_type)
     self.assertTrue(
         type_folder.local_namespace.HasFindingTypes(
@@ -319,7 +319,8 @@ class EntityTypeLibTest(absltest.TestCase):
   def testAddMultipleTypes(self):
     fields_universe = field_lib.FieldUniverse([])
     fields_universe._namespace_map = {'': ('animal'), 'ANIMAL': ('meow')}
-    folderpath = 'ANIMAL/entity_types'
+    # folderpath = 'ANIMAL/entity_types'
+    folderpath = os.path.join('ANIMAL', 'entity_types')
     type_folder = entity_type_lib.EntityTypeFolder(folderpath, fields_universe)
     self.assertFalse(type_folder.GetFindings())
 
@@ -329,13 +330,13 @@ class EntityTypeLibTest(absltest.TestCase):
         filepath=rel_typepath,
         typename='cat',
         description='feline animal',
-        local_field_tuples=_FS(['ANIMAL/meow', 'ANIMAL/claws', '/animal']))
+        local_field_tuples=_FS([os.path.join('ANIMAL', 'meow'), os.path.join('ANIMAL', 'claws'), '/animal']))
     # good entity type
     good_type = entity_type_lib.EntityType(
         filepath=rel_typepath,
         typename='kitty',
         description='feline animal',
-        local_field_tuples=_FS(['ANIMAL/meow', '/animal']))
+        local_field_tuples=_FS([os.path.join('ANIMAL', 'meow'), '/animal']))
     type_folder._AddType(good_type)
     type_folder._AddType(bad_type)
 
@@ -352,7 +353,8 @@ class EntityTypeLibTest(absltest.TestCase):
   def testAddDuplicateTypes(self):
     fields_universe = field_lib.FieldUniverse([])
     fields_universe._namespace_map = {'': ('animal'), 'ANIMAL': ('meow')}
-    folderpath = 'ANIMAL/entity_types'
+    # folderpath = 'ANIMAL/entity_types'
+    folderpath = os.path.join('ANIMAL', 'entity_types')
     type_folder = entity_type_lib.EntityTypeFolder(folderpath, fields_universe)
     self.assertFalse(type_folder.GetFindings())
 
@@ -362,13 +364,13 @@ class EntityTypeLibTest(absltest.TestCase):
         filepath=rel_typepath,
         typename='kitty',
         description='feline animal',
-        local_field_tuples=_FS(['ANIMAL/meow', '/animal']))
+        local_field_tuples=_FS([os.path.join('ANIMAL', 'meow'), '/animal']))
     # duplicate type
     dup_type = entity_type_lib.EntityType(
         filepath=rel_typepath,
         typename='kitty',
         description='feline animal',
-        local_field_tuples=_FS(['ANIMAL/meow', '/animal']))
+        local_field_tuples=_FS([os.path.join('ANIMAL', 'meow'), '/animal']))
 
     type_folder._AddType(entity_type)
     type_folder._AddType(dup_type)
