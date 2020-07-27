@@ -40,6 +40,7 @@ _SCHEMA = syaml.MapPattern(syaml.Str(),
                                    syaml.Str(),
                                    syaml.MapPattern(syaml.Str(), syaml.Str())),
                                syaml.Optional('translation'): syaml.Any(),
+                               syaml.Optional('translate_like'): syaml.Str(),
                                syaml.Optional('metadata'): syaml.Any()
                                }))
 

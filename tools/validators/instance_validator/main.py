@@ -25,6 +25,8 @@ It saves time and provides more accuracy than manual error checks."""
 from __future__ import print_function
 from sys import exit
 
+from validate import entity_instance
+from validate import generate_universe
 import instance_parser
 import argparse
 
@@ -41,41 +43,31 @@ if __name__ == '__main__':
   arg = parser.parse_args()
 
   # SYNTAX VALIDATION
-  print('\nValidator starting ...\n')
+  print('\nValidator starting ...')
   filename = arg.filename
 
   # throws errors for syntax
   raw_parse = instance_parser.parse_yaml(filename)
 
   if raw_parse is None:
-    print('\Syntax Error.')
+    print('\nSyntax Error.')
     exit(0)
 
   parsed = dict(raw_parse)
 
   print('Passed syntax checks!')
 
+  universe = generate_universe.BuildUniverse()
+
   # ONTOLOGY VALIDATION
-  '''
-  print('Building ontology universe ...')
-
-  universe = generate_universe.build_universe()
-  parsed_univ = generate_universe.parse_universe(universe)
-
-  # TODO(https://github.com/google/digitalbuildings/issues/42): 
-      replace this assignment logic with NamedTuple ontology generation
-  fields, subfields_map, states_map, units_map, entities_map = parsed_univ
-
   entity_names = list(parsed.keys())
 
-  for name in entity_names:
-    entity = dict(parsed[name])
-    ontology_validation.validate_entity(entity,
-                                        fields,
-                                        subfields_map,
-                                        states_map,
-                                        units_map,
-                                        entities_map)
+  for entity_name in entity_names:
+    entity = dict(parsed[entity_name])
+    instance = entity_instance.EntityInstance(entity, universe)
 
-  print('Passed all checks!\n')
-  '''
+    if not instance.IsValidEntityInstance():
+      print('\nInvalid entity instance')
+      exit(0)
+
+  print('Passes all checks!')
